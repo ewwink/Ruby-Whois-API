@@ -1,0 +1,238 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Ruby-whois-api by ewwink</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/main.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+
+      <header>
+        <h1>Ruby-whois-api</h1>
+        <p>A ruby Whois lookup API application with JSON Output</p>
+      </header>
+
+      <div id="banner">
+        <span id="logo"></span>
+
+        <a href="https://github.com/ewwink/Ruby-Whois-API" class="button fork"><strong>View On GitHub</strong></a>
+        <div class="downloads">
+          <span>Downloads:</span>
+          <ul>
+            <li><a href="https://github.com/ewwink/Ruby-Whois-API/zipball/master" class="button">ZIP</a></li>
+            <li><a href="https://github.com/ewwink/Ruby-Whois-API/tarball/master" class="button">TAR</a></li>
+          </ul>
+        </div>
+      </div><!-- end banner -->
+
+    <div class="wrapper">
+      <nav>
+        <ul></ul>
+      </nav>
+      <section>
+        <h1>
+<a name="about-ruby-whois" class="anchor" href="#about-ruby-whois"><span class="octicon octicon-link"></span></a>About Ruby Whois</h1>
+
+<p>Ruby Whois is a simple WHOIS lookup application. It's built on Sinatra and Heroku friendly.</p>
+
+<h3>
+<a name="api-usage" class="anchor" href="#api-usage"><span class="octicon octicon-link"></span></a>API Usage</h3>
+
+<p>view complete API Usage documentation on <a href="http://ruby-whois.org/manual/usage/">http://ruby-whois.org/manual/usage/</a></p>
+
+<table>
+<thead><tr>
+<th>Property</th>
+<th>Returns</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>disclaimer</td>
+<td>String / Nil</td>
+</tr>
+<tr>
+<td>domain</td>
+<td>String / Nil</td>
+</tr>
+<tr>
+<td>domain_id</td>
+<td>String / Nil</td>
+</tr>
+<tr>
+<td>status</td>
+<td>String / Nil</td>
+</tr>
+<tr>
+<td>registered?</td>
+<td>Boolean</td>
+</tr>
+<tr>
+<td>available?</td>
+<td>Boolean</td>
+</tr>
+<tr>
+<td>created_on</td>
+<td>Time / Nil</td>
+</tr>
+<tr>
+<td>updated_on</td>
+<td>Time / Nil</td>
+</tr>
+<tr>
+<td>expires_on</td>
+<td>Time / Nil</td>
+</tr>
+<tr>
+<td>registrar</td>
+<td>Whois::Record::Registrar / Nil</td>
+</tr>
+<tr>
+<td>registrant_contacts</td>
+<td>Array&lt;Whois::Record::Contact&gt;</td>
+</tr>
+<tr>
+<td>admin_contacts</td>
+<td>Array&lt;Whois::Record::Contact&gt;</td>
+</tr>
+<tr>
+<td>technical_contacts</td>
+<td>Array&lt;Whois::Record::Contact&gt;</td>
+</tr>
+<tr>
+<td>nameservers</td>
+<td>Array&lt;Whois::Record::Nameserver&gt;</td>
+</tr>
+</tbody>
+</table><h3>
+<a name="filtering-output" class="anchor" href="#filtering-output"><span class="octicon octicon-link"></span></a>Filtering Output</h3>
+
+<table>
+<thead><tr>
+<th>Property</th>
+<th>Value</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>output</td>
+<td>raw, json</td>
+</tr>
+<tr>
+<td>key</td>
+<td>see table above</td>
+</tr>
+<tr>
+<td>debug</td>
+<td>true</td>
+</tr>
+</tbody>
+</table><h3>
+<a name="use-it" class="anchor" href="#use-it"><span class="octicon octicon-link"></span></a>Use It</h3>
+
+<pre><code>## Main App
+http://yourwebsite/
+
+## HTML Output
+http://yourwebsite/lookup?url=prpagerank.com
+
+## JSON Output    
+http://yourwebsite/lookup?url=prpagerank.com&amp;output=json
+
+## JSON Output  and only return Creation Date   
+http://yourwebsite/lookup?url=prpagerank.com&amp;output=json&amp;key=created_on
+
+## Raw/Text Output    
+http://yourwebsite/lookup?url=prpagerank.com&amp;output=raw
+
+## Raw/Text Output and only return Expires Date   
+http://yourwebsite/lookup?url=prpagerank.com&amp;output=raw&amp;key=expires_on
+</code></pre>
+
+<h3>
+<a name="debug-and-error-handling" class="anchor" href="#debug-and-error-handling"><span class="octicon octicon-link"></span></a>Debug and Error Handling</h3>
+
+<p>sometimes "key" like "created_on" will return null even the domain is registered to debug or view raw response data just use "debug=true" in the URL</p>
+
+<pre><code>## Debug Raw Response  
+http://yourwebsite/lookup?url=prpagerank.com&amp;output=raw&amp;key=expires_on&amp;debug=true
+
+## Debug JSON Response  
+http://yourwebsite/lookup?url=prpagerank.com&amp;output=json&amp;key=expires_on&amp;debug=true
+</code></pre>
+
+<h5>
+<a name="example-debug-output-created_on-for-googlecoid" class="anchor" href="#example-debug-output-created_on-for-googlecoid"><span class="octicon octicon-link"></span></a>Example Debug Output "created_on" for Google.co.id</h5>
+
+<pre><code>[{"created_on" : "null"},
+{"debug_mode" : "\n\nDomain ID:PANDI-DO246796\nDomain Name:GOOGLE.CO.ID\nCreated On:18-Dec-2004 13:33:21 UTC\nLast
+Updated On:20-Sep-2013 23:24:51 UTC\nExpiration Date:01-Sep-2014 23:59:59 UTC.....}]
+</code></pre>
+
+<h3>
+<a name="clone-it" class="anchor" href="#clone-it"><span class="octicon octicon-link"></span></a>Clone It</h3>
+
+<pre><code>git clone https://github.com/ewwink/Ruby-Whois-API.git
+</code></pre>
+
+<h3>
+<a name="restrict-it" class="anchor" href="#restrict-it"><span class="octicon octicon-link"></span></a>Restrict It</h3>
+
+<p>Edit</p>
+
+<pre><code>main.rb
+</code></pre>
+
+<p>Change this</p>
+
+<pre><code>before do
+  response['Access-Control-Allow-Origin'] = '*'
+end
+</code></pre>
+
+<p>To this</p>
+
+<pre><code>before do
+  response['Access-Control-Allow-Origin'] = 'http://yourwebsite.com'
+end
+</code></pre>
+
+<h1>
+<a name="deploy-it-on-heroku" class="anchor" href="#deploy-it-on-heroku"><span class="octicon octicon-link"></span></a>Deploy It on Heroku</h1>
+
+<p>To use this buildpack, on a new Heroku app:</p>
+
+<pre><code>heroku create -s cedar -b https://github.com/ewwink/Ruby-Whois-API.git
+</code></pre>
+
+<p>On an existing app:</p>
+
+<pre><code>heroku config:add BUILDPACK_URL=https://github.com/ewwink/Ruby-Whois-API.git
+</code></pre>
+
+<hr><h4>
+<a name="supported-by" class="anchor" href="#supported-by"><span class="octicon octicon-link"></span></a>Supported by:</h4>
+
+<p>prpagerank.com provide all in one SEO Tools like for <a href="http://www.prpagerank.com"><strong>Check Pagerank</strong></a> of websites and more.</p>
+
+<h4>
+<a name="credit" class="anchor" href="#credit"><span class="octicon octicon-link"></span></a>Credit</h4>
+
+<p>forked from <a href="https://github.com/okor/whoiz">https://github.com/okor/whoiz</a></p>
+      </section>
+      <footer>
+        <p>Project maintained by <a href="https://github.com/ewwink">ewwink</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+</html>
