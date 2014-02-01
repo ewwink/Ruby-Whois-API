@@ -94,14 +94,10 @@ To this
 
 Deploy It on Heroku
 ===
-To use this buildpack, on a new Heroku app:
 ```
-heroku create -s cedar -b https://github.com/ewwink/Ruby-Whois-API.git
-```
-
-On an existing app:
-```
-heroku config:add BUILDPACK_URL=https://github.com/ewwink/Ruby-Whois-API.git
+heroku create
+git push heroku master
+heroku open
 ```
 
 ----------
