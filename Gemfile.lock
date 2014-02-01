@@ -2,7 +2,7 @@ GEM
   remote: http://rubygems.org/
   specs:
     daemons (1.1.9)
-    eventmachine (1.0.3-x86-mingw32)
+    eventmachine (1.0.3)
     haml (4.0.5)
       tilt
     json (1.8.1)
