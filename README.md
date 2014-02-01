@@ -1,6 +1,6 @@
 #About Ruby Whois
 
-Ruby Whois is forked from WhoIz, its a simple WHOIS lookup application. It's built on Sinatra and Heroku friendly.
+Ruby Whois is a simple WHOIS lookup application. It's built on Sinatra and Heroku friendly.
 
 ###API Usage
 
@@ -70,7 +70,7 @@ sometimes "key" like "created_on" will return null even the domain is registered
 
 ###Clone It
 
-    git clone https://github.com/ewwink/ruby-whois.git
+    git clone https://github.com/ewwink/Ruby-Whois-API.git
 
 
 ###Restrict It
@@ -92,14 +92,21 @@ To this
     end
 
 
-Deploy It
+Deploy It on Heroku
 ===
-    heroku create
-    git push heroku master
-    heroku open
+To use this buildpack, on a new Heroku app:
+```
+heroku create -s cedar -b https://github.com/ewwink/Ruby-Whois-API.git
+```
 
+On an existing app:
+```
+heroku config:add BUILDPACK_URL=https://github.com/ewwink/Ruby-Whois-API.git
+```
 
+----------
+####Supported by:
+prpagerank.com provide all in one SEO Tools like for [**Check Pagerank**](http://www.prpagerank.com) of websites and more.
 
-Supported by
-------------
-prpagerank.com provide all in one SEO Tools like for [Check Pagerank](http://www.prpagerank.com) of websites and more.
+####Credit
+forked from https://github.com/okor/whoiz
